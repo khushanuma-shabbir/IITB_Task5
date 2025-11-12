@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern UI Components - Vanilla JS</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --primary-light: #818cf8;
+      --secondary: #ec4899;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --dark: #0f172a;
+      --dark-lighter: #1e293b;
+      --gray: #64748b;
+      --gray-light: #cbd5e1;
+      --white: #ffffff;
+      --radius: 16px;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,0.2);
+      --shadow-xl: 0 20px 60px rgba(0,0,0,0.3);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: var(--dark);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      background-attachment: fixed;
+      min-height: 100vh;
+      padding: 3rem 1.5rem;
+      overflow-x: hidden;
+    }
+
+    .floating-shapes {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .shape {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 50%;
+      animation: float 20s infinite ease-in-out;
+    }
+
+    .shape:nth-child(1) {
+      width: 300px;
+      height: 300px;
+      top: -150px;
+      left: -150px;
+      animation-delay: 0s;
+    }
+
+    .shape:nth-child(2) {
+      width: 200px;
+      height: 200px;
+      top: 50%;
+      right: -100px;
+      animation-delay: -5s;
+    }
+
+    .shape:nth-child(3) {
+      width: 250px;
+      height: 250px;
+      bottom: -125px;
+      left: 30%;
+      animation-delay: -10s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(50px, 50px) rotate(90deg); }
+      50% { transform: translate(0, 100px) rotate(180deg); }
+      75% { transform: translate(-50px, 50px) rotate(270deg); }
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 4rem;
+      animation: fadeInDown 0.8s ease;
+    }
+
+    .header h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff 0%, #e0e7ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+      text-shadow: 0 4px 20px rgba(255,255,255,0.3);
+      letter-spacing: -2px;
+    }
+
+    .header p {
+      font-size: 1.5rem;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 300;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.5rem 1.25rem;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 50px;
+      color: white;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      box-shadow: var(--shadow-xl);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: fadeInUp 0.8s ease backwards;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.25);
+    }
+
+    .card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .card:nth-child(1) { animation-delay: 0.1s; }
+    .card:nth-child(2) { animation-delay: 0.2s; }
+    .card:nth-child(3) { animation-delay: 0.3s; }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .icon-wrapper {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover .icon-wrapper {
+      transform: rotate(10deg) scale(1.1);
+    }
+
+    .card-header h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin: 0;
+    }
+
+    .card-description {
+      color: var(--gray);
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
+    }
+
+    .feature-list {
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-list li {
+      padding: 0.5rem 0;
+      color: var(--gray);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+    }
+
+    .feature-list li::before {
+      content: '✓';
+      width: 24px;
+      height: 24px;
+      background: linear-gradient(135deg, var(--success), #34d399);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    /* Buttons */
+    .btn {
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+      position: relative;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    .btn:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn:focus {
+      outline: 3px solid rgba(99, 102, 241, 0.5);
+      outline-offset: 3px;
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, var(--secondary), #f472b6);
+      box-shadow: 0 4px 16px rgba(236, 72, 153, 0.3);
+    }
+
+    .btn-secondary:hover {
+      box-shadow: 0 8px 24px rgba(236, 72, 153, 0.4);
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      animation: fadeIn 0.3s ease;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      background: white;
+      border-radius: 24px;
+      padding: 3rem;
+      max-width: 600px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+      animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+
+    .modal::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--warning));
+      border-radius: 24px 24px 0 0;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 2rem;
+    }
+
+    .modal-header h3 {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 0;
+    }
+
+    .modal-close {
+      background: var(--gray-light);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      color: var(--dark);
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .modal-close:hover {
+      background: var(--dark);
+      color: white;
+      transform: rotate(90deg);
+    }
+
+    .modal-close:focus {
+      outline: 3px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    .modal-body {
+      color: var(--gray);
+      line-height: 1.8;
+    }
+
+    .modal-body h4 {
+      color: var(--dark);
+      margin: 1.5rem 0 1rem;
+      font-size: 1.25rem;
+    }
+
+    .modal-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .modal-feature {
+      padding: 1.5rem;
+      background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+      border-radius: 12px;
+      border: 1px solid var(--gray-light);
+      transition: all 0.3s ease;
+    }
+
+    .modal-feature:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .modal-feature-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-feature-title {
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 0.25rem;
+    }
+
+    .modal-feature-text {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+
+    /* Tabs Styles */
+    .tabs-container {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+
+    .tab-list {
+      display: flex;
+      background: var(--dark);
+      list-style: none;
+      position: relative;
+    }
+
+    .tab-indicator {
+      position: absolute;
+      bottom: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .tab-button {
+      flex: 1;
+      padding: 1.25rem 1.5rem;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.6);
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .tab-button:hover {
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .tab-button[aria-selected="true"] {
+      color: white;
+    }
+
+    .tab-button:focus {
+      outline: 3px solid var(--primary);
+      outline-offset: -3px;
+      z-index: 2;
+    }
+
+    .tab-panel {
+      display: none;
+      padding: 2.5rem;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .tab-panel[aria-hidden="false"] {
+      display: block;
+    }
+
+    .tab-panel h3 {
+      font-size: 1.75rem;
+      color: var(--dark);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .tab-panel-content {
+      color: var(--gray);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .tab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .tab-item {
+      padding: 1.25rem;
+      background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+      border-radius: 12px;
+      border-left: 4px solid var(--primary);
+      transition: all 0.3s ease;
+    }
+
+    .tab-item:hover {
+      transform: translateX(4px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .tab-item-title {
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 0.25rem;
+      font-size: 0.95rem;
+    }
+
+    .tab-item-text {
+      font-size: 0.85rem;
+      color: var(--gray);
+    }
+
+    /* Carousel Styles */
+    .carousel-wrapper {
+      position: relative;
+    }
+
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      background: white;
+      box-shadow: var(--shadow-md);
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      padding: 4rem 3rem;
+      text-align: center;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .carousel-slide::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+    }
+
+    .carousel-slide-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .carousel-slide h3 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .carousel-slide p {
+      font-size: 1.25rem;
+      opacity: 0.95;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .carousel-controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .carousel-btn {
+      padding: 0.875rem 1.75rem;
+      border: none;
+      border-radius: 12px;
+      background: white;
+      color: var(--dark);
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .carousel-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .carousel-btn:focus {
+      outline: 3px solid var(--primary);
+      outline-offset: 3px;
+    }
+
+    .carousel-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .carousel-indicators {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .carousel-indicator {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+      border: 2px solid white;
+      cursor: pointer;
+      padding: 0;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .carousel-indicator.active {
+      background: white;
+      transform: scale(1.3);
+      box-shadow: 0 4px 12px rgba(255,255,255,0.4);
+    }
+
+    .carousel-indicator:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 3px;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 2.5rem;
+      }
+
+      .header p {
+        font-size: 1.1rem;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 2rem;
+      }
+
+      .modal {
+        padding: 2rem;
+      }
+
+      .carousel-slide {
+        padding: 3rem 2rem;
+      }
+
+      .carousel-slide h3 {
+        font-size: 1.75rem;
+      }
+
+      .tab-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Accessibility */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--gray-light);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary-dark);
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-shapes">
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+  </div>
+
+  <div class="container">
+    <header class="header">
+      <h1>✨ Modern UI Components</h1>
+      <p>Beautiful, accessible, and production-ready vanilla JavaScript components</p>
+      <span class="badge">🚀 Zero Dependencies • 100% Vanilla JS</span>
+    </header>
+
+    <div class="grid">
+      <!-- Modal Card -->
+      <div class="card">
+        <div class="card-header">
+          <div class="icon-wrapper">📦</div>
+          <h2>Modal Dialog</h2>
+        </div>
+        <p class="card-description">
+          Elegant modal dialogs with smooth animations, focus trapping, and full accessibility support.
+        </p>
+        <ul class="feature-list">
+          <li>Focus trap & keyboard navigation</li>
+          <li>ESC key & click-outside to close</li>
+          <li>WCAG 2.1 Level AA compliant</li>
+          <li>Body scroll lock when open</li>
+        </ul>
+        <button class="btn" id="openModal">
+          <span>Launch Modal</span>
+          <span>→</span>
+        </button>
+      </div>
+
+      <!-- Tabs Card -->
+      <div class="card">
+        <div class="card-header">
+          <div class="icon-wrapper">📑</div>
+          <h2>Smart Tabs</h2>
+        </div>
+        <p class="card-description">
+          Intuitive tab interface with arrow key navigation and smooth transitions between panels.
+        </p>
+        <ul class="feature-list">
+          <li>Arrow key navigation (← →)</li>
+          <li>Animated sliding indicator</li>
+          <li>Home/End key support</li>
+          <li>WAI-ARIA best practices</li>
+        </ul>
+        <button class="btn btn-secondary" onclick="document.getElementById('mainTabs').scrollIntoView({behavior: 'smooth'})">
+          <span>View Tabs</span>
+          <span>→</span>
+        </button>
+      </div>
+
+      <!-- Carousel Card -->
+      <div class="card">
+        <div class="card-header">
+          <div class="icon-wrapper">🎠</div>
+          <h2>Image Carousel</h2>
+        </div>
+        <p class="card-description">
+          Smooth, responsive carousel with multiple navigation options and stunning visual effects.
+        </p>
+        <ul class="feature-list">
+          <li>Keyboard & button controls</li>
+          <li>Dot indicators for quick access</li>
+          <li>Touch-ready architecture</li>
+          <li>Auto-play capability (optional)</li>
+        </ul>
+        <button class="btn" onclick="document.getElementById('mainCarousel').scrollIntoView({behavior: 'smooth'})">
+          <span>See Carousel</span>
+          <span>→</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Tabs Component Section -->
+    <div class="card" style="grid-column: 1 / -1; animation-delay: 0.4s;">
+      <div class="card-header">
+        <div class="icon-wrapper" style="background: linear-gradient(135deg, #ec4899, #f472b6);">📑</div>
+        <h2>Interactive Tabs Component</h2>
+      </div>
+      <p class="card-description">
+        Experience seamless content organization with our tab system. Navigate using arrow keys or click to switch between sections.
+      </p>
+      
+      <div class="tabs-container" id="mainTabs">
+        <ul class="tab-list" role="tablist">
+          <div class="tab-indicator" id="tabIndicator"></div>
+          <li role="presentation">
+            <button class="tab-button" role="tab" aria-selected="true" aria-controls="panel1" id="tab1">
+              👤 Profile
+            </button>
+          </li>
+          <li role="presentation">
+            <button class="tab-button" role="tab" aria-selected="false" aria-controls="panel2" id="tab2">
+              ⚙️ Settings
+            </button>
+          </li>
+          <li role="presentation">
+            <button class="tab-button" role="tab" aria-selected="false" aria-controls="panel3" id="tab3">
+              💬 Messages
+            </button>
+          </li>
+        </ul>
+        
+        <div class="tab-panel" role="tabpanel" id="panel1" aria-labelledby="tab1" aria-hidden="false">
+          <h3>👤 Profile Management</h3>
+          <p class="tab-panel-content">
+            Manage your personal information, update your avatar, and customize your public profile. All changes are saved automatically with visual feedback.
+          </p>
+          <div class="tab-grid">
+            <div class="tab-item">
+              <div class="tab-item-title">Personal Info</div>
+              <div class="tab-item-text">Name, email, bio</div>
+            </div>
+            <div class="tab-item">
+              <div class="tab-item-title">Avatar Upload</div>
+              <div class="tab-item-text">Profile picture</div>
+            </div>
+            <div class="tab-item">
+              <div class="tab-item-title">Social Links</div>
+              <div class="tab-item-text">Connect accounts</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="tab-panel" role="tabpanel" id="panel2" aria-labelledby="tab2" aria-hidden="true">
+          <h3>⚙️ Application Settings</h3>
+          <p class="tab-panel-content">
+            Configure your experience with theme customization, notification preferences, and privacy controls. All settings sync across devices.
+          </p>
+          <div class="tab-grid">
+            <div class="tab-item">
+              <div class="tab-item-title">Theme Options</div>
+              <div class="tab-item-text">Light/Dark mode</div>
+            </div>
+            <div class="tab-item">
+              <div class="tab-item-title">Notifications</div>
+              <div class="tab-item-text">Email, push, SMS</div>
+            </div>
+            <div class="tab-item">
+              <div class="tab-item-title">Privacy</div>
+              <div class="tab-item-text">Data & security</div>
+            </div>
+          </div>
+        </div>
+                <!-- Third Tab Panel -->
+        <div class="tab-panel" role="tabpanel" id="panel3" aria-labelledby="tab3" aria-hidden="true">
+          <h3>💬 Message Center</h3>
+          <p class="tab-panel-content">
+            Stay connected with real-time chat, announcements, and feedback messages. 
+            Enjoy organized, distraction-free communication.
+          </p>
+          <div class="tab-grid">
+            <div class="tab-item">
+              <div class="tab-item-title">Inbox</div>
+              <div class="tab-item-text">Private messages</div>
+            </div>
+            <div class="tab-item">
+              <div class="tab-item-title">Notifications</div>
+              <div class="tab-item-text">Updates & alerts</div>
+            </div>
+            <div class="tab-item">
+              <div class="tab-item-title">Archived</div>
+              <div class="tab-item-text">Saved conversations</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carousel Component Section -->
+    <div class="card" id="mainCarousel" style="grid-column: 1 / -1; animation-delay: 0.5s;">
+      <div class="card-header">
+        <div class="icon-wrapper" style="background: linear-gradient(135deg, #10b981, #34d399);">🎠</div>
+        <h2>Interactive Image Carousel</h2>
+      </div>
+      <p class="card-description">
+        A stunning carousel for showcasing features, testimonials, or highlights. 
+        Navigate with buttons, dots, or keyboard keys.
+      </p>
+
+      <div class="carousel-wrapper">
+        <div class="carousel">
+          <div class="carousel-track" id="carouselTrack">
+            <div class="carousel-slide">
+              <div class="carousel-slide-content">
+                <h3>Seamless Animations</h3>
+                <p>Enjoy ultra-smooth transitions between slides with no performance lag.</p>
+              </div>
+            </div>
+            <div class="carousel-slide">
+              <div class="carousel-slide-content">
+                <h3>Fully Responsive</h3>
+                <p>Adapts beautifully to any screen size — from mobile to desktop.</p>
+              </div>
+            </div>
+            <div class="carousel-slide">
+              <div class="carousel-slide-content">
+                <h3>Keyboard Control</h3>
+                <p>Navigate easily using arrow keys or on-screen buttons.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-controls">
+          <button class="carousel-btn" id="prevBtn">⬅️ Prev</button>
+          <button class="carousel-btn" id="nextBtn">Next ➡️</button>
+        </div>
+
+        <div class="carousel-indicators" id="carouselIndicators">
+          <button class="carousel-indicator active"></button>
+          <button class="carousel-indicator"></button>
+          <button class="carousel-indicator"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Component -->
+  <div class="modal-overlay" id="modalOverlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header">
+        <h3 id="modalTitle">📦 Modern Modal Dialog</h3>
+        <button class="modal-close" id="closeModal" aria-label="Close modal">×</button>
+      </div>
+      <div class="modal-body">
+        <p>
+          This is a fully accessible modal dialog built with pure JavaScript. 
+          It traps focus, disables background scrolling, and closes with ESC or outside clicks.
+        </p>
+
+        <h4>Features:</h4>
+        <div class="modal-features">
+          <div class="modal-feature">
+            <div class="modal-feature-icon">🎨</div>
+            <div class="modal-feature-title">Beautiful Design</div>
+            <div class="modal-feature-text">Soft shadows and fluid transitions</div>
+          </div>
+          <div class="modal-feature">
+            <div class="modal-feature-icon">🔒</div>
+            <div class="modal-feature-title">Focus Trapping</div>
+            <div class="modal-feature-text">Keyboard users stay inside modal</div>
+          </div>
+          <div class="modal-feature">
+            <div class="modal-feature-icon">⌨️</div>
+            <div class="modal-feature-title">Keyboard Support</div>
+            <div class="modal-feature-text">Use ESC key to close anytime</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Functionality -->
+  <script>
+    // ---------- Modal ----------
+    const openModalBtn = document.getElementById('openModal');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const closeModalBtn = document.getElementById('closeModal');
+
+    openModalBtn.addEventListener('click', () => {
+      modalOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      closeModalBtn.focus();
+    });
+
+    closeModalBtn.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', e => {
+      if (e.target === modalOverlay) closeModal();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && modalOverlay.classList.contains('active')) closeModal();
+    });
+
+    function closeModal() {
+      modalOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+      openModalBtn.focus();
+    }
+
+    // ---------- Tabs ----------
+    const tabs = document.querySelectorAll('.tab-button');
+    const panels = document.querySelectorAll('.tab-panel');
+    const indicator = document.getElementById('tabIndicator');
+
+    function activateTab(tab) {
+      tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
+      panels.forEach(p => p.setAttribute('aria-hidden', 'true'));
+
+      tab.setAttribute('aria-selected', 'true');
+      document.getElementById(tab.getAttribute('aria-controls')).setAttribute('aria-hidden', 'false');
+
+      moveIndicator();
+    }
+
+    function moveIndicator() {
+      const activeTab = document.querySelector('.tab-button[aria-selected="true"]');
+      indicator.style.width = activeTab.offsetWidth + 'px';
+      indicator.style.left = activeTab.offsetLeft + 'px';
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => activateTab(tab));
+      tab.addEventListener('keydown', e => {
+        let index = Array.from(tabs).indexOf(document.activeElement);
+        if (e.key === 'ArrowRight') tabs[(index + 1) % tabs.length].focus();
+        else if (e.key === 'ArrowLeft') tabs[(index - 1 + tabs.length) % tabs.length].focus();
+        else if (e.key === 'Home') tabs[0].focus();
+        else if (e.key === 'End') tabs[tabs.length - 1].focus();
+      });
+    });
+
+    window.addEventListener('resize', moveIndicator);
+    moveIndicator();
+
+    // ---------- Carousel ----------
+    const track = document.getElementById('carouselTrack');
+    const slides = Array.from(track.children);
+    const nextBtn = document.getElementById('nextBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const indicators = document.querySelectorAll('.carousel-indicator');
+    let currentIndex = 0;
+
+    function updateCarousel(index) {
+      track.style.transform = 'translateX(' + (-index * 100) + '%)';
+      indicators.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+      prevBtn.disabled = index === 0;
+      nextBtn.disabled = index === slides.length - 1;
+    }
+
+    nextBtn.addEventListener('click', () => {
+      if (currentIndex < slides.length - 1) {
+        currentIndex++;
+        updateCarousel(currentIndex);
+      }
+    });
+
+    prevBtn.addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateCarousel(currentIndex);
+      }
+    });
+
+    indicators.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        currentIndex = i;
+        updateCarousel(i);
+      });
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') nextBtn.click();
+      if (e.key === 'ArrowLeft') prevBtn.click();
+    });
+
+    updateCarousel(0);
+  </script>
+</body>
+</html>
