@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modern UI Components - Vanilla JS</title>
+  <title>Techfest IIT Bombay - Asia's Largest Science & Technology Festival</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
     
@@ -14,10 +14,11 @@
     }
 
     :root {
-      --primary: #6366f1;
-      --primary-dark: #4f46e5;
-      --primary-light: #818cf8;
-      --secondary: #ec4899;
+      --primary: #ff6b35;
+      --primary-dark: #e55a2b;
+      --primary-light: #ff8c5a;
+      --secondary: #004e89;
+      --accent: #ffd23f;
       --success: #10b981;
       --warning: #f59e0b;
       --dark: #0f172a;
@@ -36,7 +37,7 @@
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       line-height: 1.6;
       color: var(--dark);
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      background: linear-gradient(135deg, #004e89 0%, #ff6b35 50%, #ffd23f 100%);
       background-attachment: fixed;
       min-height: 100vh;
       padding: 3rem 1.5rem;
@@ -109,7 +110,7 @@
     .header h1 {
       font-size: 4rem;
       font-weight: 800;
-      background: linear-gradient(135deg, #fff 0%, #e0e7ff 100%);
+      background: linear-gradient(135deg, #fff 0%, #ffd23f 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -201,7 +202,7 @@
       align-items: center;
       justify-content: center;
       font-size: 1.75rem;
-      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+      box-shadow: 0 8px 24px rgba(255, 107, 53, 0.3);
       transition: transform 0.3s ease;
     }
 
@@ -263,7 +264,7 @@
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       background: linear-gradient(135deg, var(--primary), var(--primary-light));
       color: white;
-      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+      box-shadow: 0 4px 16px rgba(255, 107, 53, 0.3);
       position: relative;
       overflow: hidden;
       display: inline-flex;
@@ -291,7 +292,7 @@
 
     .btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
+      box-shadow: 0 8px 24px rgba(255, 107, 53, 0.4);
     }
 
     .btn:active {
@@ -299,17 +300,17 @@
     }
 
     .btn:focus {
-      outline: 3px solid rgba(99, 102, 241, 0.5);
+      outline: 3px solid rgba(255, 107, 53, 0.5);
       outline-offset: 3px;
     }
 
     .btn-secondary {
-      background: linear-gradient(135deg, var(--secondary), #f472b6);
-      box-shadow: 0 4px 16px rgba(236, 72, 153, 0.3);
+      background: linear-gradient(135deg, var(--secondary), #006bb3);
+      box-shadow: 0 4px 16px rgba(0, 78, 137, 0.3);
     }
 
     .btn-secondary:hover {
-      box-shadow: 0 8px 24px rgba(236, 72, 153, 0.4);
+      box-shadow: 0 8px 24px rgba(0, 78, 137, 0.4);
     }
 
     /* Modal Styles */
@@ -353,7 +354,7 @@
       left: 0;
       right: 0;
       height: 6px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--warning));
+      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
       border-radius: 24px 24px 0 0;
     }
 
@@ -467,7 +468,7 @@
       position: absolute;
       bottom: 0;
       height: 3px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      background: linear-gradient(90deg, var(--primary), var(--accent));
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
@@ -579,7 +580,7 @@
       min-width: 100%;
       padding: 4rem 3rem;
       text-align: center;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #004e89 0%, #ff6b35 100%);
       color: white;
       position: relative;
       overflow: hidden;
@@ -801,84 +802,84 @@
 
   <div class="container">
     <header class="header">
-      <h1>✨ Modern UI Components</h1>
-      <p>Beautiful, accessible, and production-ready vanilla JavaScript components</p>
-      <span class="badge">🚀 Zero Dependencies • 100% Vanilla JS</span>
+      <h1>🚀 Techfest IIT Bombay</h1>
+      <p>Asia's Largest Science & Technology Festival</p>
+      <span class="badge">🎯 Innovation • Competition • Excellence</span>
     </header>
 
     <div class="grid">
-      <!-- Modal Card -->
+      <!-- Competitions Card -->
       <div class="card">
         <div class="card-header">
-          <div class="icon-wrapper">📦</div>
-          <h2>Modal Dialog</h2>
+          <div class="icon-wrapper">🏆</div>
+          <h2>Competitions</h2>
         </div>
         <p class="card-description">
-          Elegant modal dialogs with smooth animations, focus trapping, and full accessibility support.
+          Challenge yourself in cutting-edge technical competitions across robotics, coding, electronics, and more.
         </p>
         <ul class="feature-list">
-          <li>Focus trap & keyboard navigation</li>
-          <li>ESC key & click-outside to close</li>
-          <li>WCAG 2.1 Level AA compliant</li>
-          <li>Body scroll lock when open</li>
+          <li>International level competitions</li>
+          <li>Prize money worth crores</li>
+          <li>Expert mentorship & guidance</li>
+          <li>Real-world problem solving</li>
         </ul>
         <button class="btn" id="openModal">
-          <span>Launch Modal</span>
+          <span>Explore Events</span>
           <span>→</span>
         </button>
       </div>
 
-      <!-- Tabs Card -->
+      <!-- Exhibitions Card -->
       <div class="card">
         <div class="card-header">
-          <div class="icon-wrapper">📑</div>
-          <h2>Smart Tabs</h2>
+          <div class="icon-wrapper">🔬</div>
+          <h2>Exhibitions</h2>
         </div>
         <p class="card-description">
-          Intuitive tab interface with arrow key navigation and smooth transitions between panels.
+          Experience groundbreaking innovations and interact with cutting-edge technology from top institutions.
         </p>
         <ul class="feature-list">
-          <li>Arrow key navigation (← →)</li>
-          <li>Animated sliding indicator</li>
-          <li>Home/End key support</li>
-          <li>WAI-ARIA best practices</li>
+          <li>Live tech demonstrations</li>
+          <li>Industry innovations showcase</li>
+          <li>Interactive science exhibits</li>
+          <li>Student project displays</li>
         </ul>
         <button class="btn btn-secondary" onclick="document.getElementById('mainTabs').scrollIntoView({behavior: 'smooth'})">
-          <span>View Tabs</span>
+          <span>View Categories</span>
           <span>→</span>
         </button>
       </div>
 
-      <!-- Carousel Card -->
+      <!-- Guest Lectures Card -->
       <div class="card">
         <div class="card-header">
-          <div class="icon-wrapper">🎠</div>
-          <h2>Image Carousel</h2>
+          <div class="icon-wrapper">🎤</div>
+          <h2>Guest Lectures</h2>
         </div>
         <p class="card-description">
-          Smooth, responsive carousel with multiple navigation options and stunning visual effects.
+          Gain insights from renowned scientists, entrepreneurs, and thought leaders shaping the future.
         </p>
         <ul class="feature-list">
-          <li>Keyboard & button controls</li>
-          <li>Dot indicators for quick access</li>
-          <li>Touch-ready architecture</li>
-          <li>Auto-play capability (optional)</li>
+          <li>Nobel laureates & industry leaders</li>
+          <li>Inspiring keynote sessions</li>
+          <li>Q&A with visionaries</li>
+          <li>Career guidance & networking</li>
         </ul>
         <button class="btn" onclick="document.getElementById('mainCarousel').scrollIntoView({behavior: 'smooth'})">
-          <span>See Carousel</span>
+          <span>See Speakers</span>
           <span>→</span>
         </button>
       </div>
     </div>
 
-    <!-- Tabs Component Section -->
+    <!-- Event Categories Section -->
     <div class="card" style="grid-column: 1 / -1; animation-delay: 0.4s;">
       <div class="card-header">
-        <div class="icon-wrapper" style="background: linear-gradient(135deg, #ec4899, #f472b6);">📑</div>
-        <h2>Interactive Tabs Component</h2>
+        <div class="icon-wrapper" style="background: linear-gradient(135deg, #004e89, #006bb3);">📋</div>
+        <h2>Event Categories</h2>
       </div>
       <p class="card-description">
-        Experience seamless content organization with our tab system. Navigate using arrow keys or click to switch between sections.
+        Explore diverse categories of events designed to challenge minds and showcase technological brilliance.
       </p>
       
       <div class="tabs-container" id="mainTabs">
@@ -886,96 +887,65 @@
           <div class="tab-indicator" id="tabIndicator"></div>
           <li role="presentation">
             <button class="tab-button" role="tab" aria-selected="true" aria-controls="panel1" id="tab1">
-              👤 Profile
+              🤖 Robotics
             </button>
           </li>
           <li role="presentation">
             <button class="tab-button" role="tab" aria-selected="false" aria-controls="panel2" id="tab2">
-              ⚙️ Settings
+              💻 Coding
             </button>
           </li>
           <li role="presentation">
             <button class="tab-button" role="tab" aria-selected="false" aria-controls="panel3" id="tab3">
-              💬 Messages
+              ⚡ Electronics
             </button>
           </li>
         </ul>
         
         <div class="tab-panel" role="tabpanel" id="panel1" aria-labelledby="tab1" aria-hidden="false">
-          <h3>👤 Profile Management</h3>
+          <h3>🤖 Robotics Competitions</h3>
           <p class="tab-panel-content">
-            Manage your personal information, update your avatar, and customize your public profile. All changes are saved automatically with visual feedback.
+            Push the boundaries of automation and AI with our flagship robotics competitions. Design, build, and program robots to compete in challenging scenarios.
           </p>
           <div class="tab-grid">
             <div class="tab-item">
-              <div class="tab-item-title">Personal Info</div>
-              <div class="tab-item-text">Name, email, bio</div>
-            </div>
-            <div class="tab-item">
-              <div class="tab-item-title">Avatar Upload</div>
-              <div class="tab-item-text">Profile picture</div>
-            </div>
-            <div class="tab-item">
-              <div class="tab-item-title">Social Links</div>
-              <div class="tab-item-text">Connect accounts</div>
+              <div class="tab-item-title">AI/ML Challenge</div>
+              <div class="tab-item-text">Machine learning competition</div>
             </div>
           </div>
         </div>
-        
-        <div class="tab-panel" role="tabpanel" id="panel2" aria-labelledby="tab2" aria-hidden="true">
-          <h3>⚙️ Application Settings</h3>
-          <p class="tab-panel-content">
-            Configure your experience with theme customization, notification preferences, and privacy controls. All settings sync across devices.
-          </p>
-          <div class="tab-grid">
-            <div class="tab-item">
-              <div class="tab-item-title">Theme Options</div>
-              <div class="tab-item-text">Light/Dark mode</div>
-            </div>
-            <div class="tab-item">
-              <div class="tab-item-title">Notifications</div>
-              <div class="tab-item-text">Email, push, SMS</div>
-            </div>
-            <div class="tab-item">
-              <div class="tab-item-title">Privacy</div>
-              <div class="tab-item-text">Data & security</div>
-            </div>
-          </div>
-        </div>
-                <!-- Third Tab Panel -->
+                
         <div class="tab-panel" role="tabpanel" id="panel3" aria-labelledby="tab3" aria-hidden="true">
-          <h3>💬 Message Center</h3>
+          <h3>⚡ Electronics Competitions</h3>
           <p class="tab-panel-content">
-            Stay connected with real-time chat, announcements, and feedback messages. 
-            Enjoy organized, distraction-free communication.
+            Showcase your circuit design and hardware skills in electronics competitions ranging from embedded systems to innovative product design.
           </p>
           <div class="tab-grid">
             <div class="tab-item">
-              <div class="tab-item-title">Inbox</div>
-              <div class="tab-item-text">Private messages</div>
+              <div class="tab-item-title">Circuit Design</div>
+              <div class="tab-item-text">PCB & hardware design</div>
             </div>
             <div class="tab-item">
-              <div class="tab-item-title">Notifications</div>
-              <div class="tab-item-text">Updates & alerts</div>
+              <div class="tab-item-title">IoT Innovation</div>
+              <div class="tab-item-text">Smart device creation</div>
             </div>
             <div class="tab-item">
-              <div class="tab-item-title">Archived</div>
-              <div class="tab-item-text">Saved conversations</div>
+              <div class="tab-item-title">Embedded Systems</div>
+              <div class="tab-item-text">Microcontroller projects</div>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Carousel Component Section -->
+    <!-- Highlights Section -->
     <div class="card" id="mainCarousel" style="grid-column: 1 / -1; animation-delay: 0.5s;">
       <div class="card-header">
-        <div class="icon-wrapper" style="background: linear-gradient(135deg, #10b981, #34d399);">🎠</div>
-        <h2>Interactive Image Carousel</h2>
+        <div class="icon-wrapper" style="background: linear-gradient(135deg, #10b981, #34d399);">✨</div>
+        <h2>Techfest Highlights</h2>
       </div>
       <p class="card-description">
-        A stunning carousel for showcasing features, testimonials, or highlights. 
-        Navigate with buttons, dots, or keyboard keys.
+        Discover what makes Techfest IIT Bombay the premier destination for tech enthusiasts across Asia.
       </p>
 
       <div class="carousel-wrapper">
@@ -983,20 +953,20 @@
           <div class="carousel-track" id="carouselTrack">
             <div class="carousel-slide">
               <div class="carousel-slide-content">
-                <h3>Seamless Animations</h3>
-                <p>Enjoy ultra-smooth transitions between slides with no performance lag.</p>
+                <h3>100,000+ Participants</h3>
+                <p>Students, innovators, and tech enthusiasts from over 2,500 colleges worldwide gather here annually.</p>
               </div>
             </div>
             <div class="carousel-slide">
               <div class="carousel-slide-content">
-                <h3>Fully Responsive</h3>
-                <p>Adapts beautifully to any screen size — from mobile to desktop.</p>
+                <h3>₹1 Crore+ Prize Money</h3>
+                <p>Compete for massive prizes, internship opportunities, and recognition from top companies.</p>
               </div>
             </div>
             <div class="carousel-slide">
               <div class="carousel-slide-content">
-                <h3>Keyboard Control</h3>
-                <p>Navigate easily using arrow keys or on-screen buttons.</p>
+                <h3>World-Class Speakers</h3>
+                <p>Learn from Nobel laureates, industry pioneers, and visionary entrepreneurs shaping tomorrow.</p>
               </div>
             </div>
           </div>
@@ -1020,31 +990,31 @@
   <div class="modal-overlay" id="modalOverlay" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <div class="modal-header">
-        <h3 id="modalTitle">📦 Modern Modal Dialog</h3>
+        <h3 id="modalTitle">🏆 Competition Details</h3>
         <button class="modal-close" id="closeModal" aria-label="Close modal">×</button>
       </div>
       <div class="modal-body">
         <p>
-          This is a fully accessible modal dialog built with pure JavaScript. 
-          It traps focus, disables background scrolling, and closes with ESC or outside clicks.
+          Techfest IIT Bombay hosts Asia's most prestigious technical competitions with participants from leading institutes worldwide. 
+          Join us to compete, innovate, and excel in your field of expertise.
         </p>
 
-        <h4>Features:</h4>
+        <h4>Why Participate?</h4>
         <div class="modal-features">
           <div class="modal-feature">
-            <div class="modal-feature-icon">🎨</div>
-            <div class="modal-feature-title">Beautiful Design</div>
-            <div class="modal-feature-text">Soft shadows and fluid transitions</div>
+            <div class="modal-feature-icon">💰</div>
+            <div class="modal-feature-title">Huge Rewards</div>
+            <div class="modal-feature-text">Cash prizes & opportunities</div>
           </div>
           <div class="modal-feature">
-            <div class="modal-feature-icon">🔒</div>
-            <div class="modal-feature-title">Focus Trapping</div>
-            <div class="modal-feature-text">Keyboard users stay inside modal</div>
+            <div class="modal-feature-icon">🎓</div>
+            <div class="modal-feature-title">Learn & Grow</div>
+            <div class="modal-feature-text">Workshops & mentorship</div>
           </div>
           <div class="modal-feature">
-            <div class="modal-feature-icon">⌨️</div>
-            <div class="modal-feature-title">Keyboard Support</div>
-            <div class="modal-feature-text">Use ESC key to close anytime</div>
+            <div class="modal-feature-icon">🌐</div>
+            <div class="modal-feature-title">Global Network</div>
+            <div class="modal-feature-text">Connect with brilliant minds</div>
           </div>
         </div>
       </div>
@@ -1159,4 +1129,33 @@
     updateCarousel(0);
   </script>
 </body>
-</html>
+</html>title">XLR8</div>
+              <div class="tab-item-text">High-speed racing bots</div>
+            </div>
+            <div class="tab-item">
+              <div class="tab-item-title">Robowars</div>
+              <div class="tab-item-text">Combat robotics battle</div>
+            </div>
+            <div class="tab-item">
+              <div class="tab-item-title">Aeromodelling</div>
+              <div class="tab-item-text">UAV & drone challenges</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="tab-panel" role="tabpanel" id="panel2" aria-labelledby="tab2" aria-hidden="true">
+          <h3>💻 Coding Competitions</h3>
+          <p class="tab-panel-content">
+            Test your programming prowess in competitive coding, hackathons, and algorithmic challenges with participants from around the world.
+          </p>
+          <div class="tab-grid">
+            <div class="tab-item">
+              <div class="tab-item-title">International Coding</div>
+              <div class="tab-item-text">Global programming contest</div>
+            </div>
+            <div class="tab-item">
+              <div class="tab-item-title">Hackathon</div>
+              <div class="tab-item-text">24-hour code sprint</div>
+            </div>
+            <div class="tab-item">
+              <div class="tab-item-
